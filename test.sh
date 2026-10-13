@@ -3,6 +3,7 @@ set -euo pipefail
 
 PROJECT_DIR="${0:A:h}"
 TEST_BINARY="$PROJECT_DIR/build/ConfigStoreTests"
+TARGET_ARCH="$(uname -m)"
 mkdir -p "$PROJECT_DIR/build"
 
 xcrun swiftc \
@@ -10,7 +11,7 @@ xcrun swiftc \
     -swift-version 5 \
     -parse-as-library \
     -DTESTING \
-    -target arm64-apple-macos13.0 \
+    -target "$TARGET_ARCH-apple-macos13.0" \
     -framework AppKit \
     -framework SwiftUI \
     "$PROJECT_DIR/Sources/ParsecChineseHelper.swift" \
