@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    # ARM runner 容量不足时可能一直排队；显式使用标准 Intel 镜像，
+    # 同时验证 build.sh/test.sh 按本机架构构建，不再硬编码 arm64。
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/checkout@v5
+      - name: Test configuration persistence
+        run: zsh test.sh
+      - name: Build and verify app bundle
+        run: zsh build.sh

@@ -3,6 +3,7 @@ set -euo pipefail
 
 PROJECT_DIR="${0:A:h}"
 BUILD_DIR="$PROJECT_DIR/build"
+TARGET_ARCH="$(uname -m)"
 APP_DIR="$BUILD_DIR/Parsec 中文助手.app"
 CONTENTS_DIR="$APP_DIR/Contents"
 MACOS_DIR="$CONTENTS_DIR/MacOS"
@@ -21,7 +22,7 @@ xcrun swiftc \
     -O \
     -swift-version 5 \
     -parse-as-library \
-    -target arm64-apple-macos13.0 \
+    -target "$TARGET_ARCH-apple-macos13.0" \
     -framework AppKit \
     -framework SwiftUI \
     "$PROJECT_DIR/Sources/ParsecChineseHelper.swift" \
@@ -30,7 +31,7 @@ xcrun swiftc \
 xcrun swiftc \
     -O \
     -swift-version 5 \
-    -target arm64-apple-macos13.0 \
+    -target "$TARGET_ARCH-apple-macos13.0" \
     -framework AppKit \
     "$PROJECT_DIR/Sources/IconGenerator.swift" \
     -o "$BUILD_DIR/IconGenerator"
