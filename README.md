@@ -16,7 +16,7 @@
 
 ## 系统要求
 
-- Apple Silicon Mac
+- Apple Silicon 或 Intel Mac（按本机架构构建）
 - macOS 13 或更高版本
 - 已安装官方 [Parsec](https://parsec.app/downloads)
 - Xcode 命令行构建工具
@@ -28,6 +28,15 @@
 ```
 
 构建结果位于 `build/Parsec 中文助手.app`。
+
+若命令行工具使用的 SDK 报 `SwiftUIMacros.StateMacro` 插件缺失，请先确认 Xcode/命令行工具与 SDK 配套。
+如果本机已有兼容的 macOS SDK，可以临时通过 `SDKROOT` 指定它运行 `./test.sh` 和 `./build.sh`，无需更改全局开发工具设置。
+例如将下方路径替换为本机已安装 SDK 的绝对路径：
+
+```bash
+SDKROOT=/path/to/MacOSX.sdk ./test.sh
+SDKROOT=/path/to/MacOSX.sdk ./build.sh
+```
 
 安装到“应用程序”文件夹：
 
